@@ -9,6 +9,8 @@ import hu.bme.mit.train.interfaces.TrainSensor;
 import hu.bme.mit.train.interfaces.TrainUser;
 import hu.bme.mit.train.system.TrainSystem;
 
+import java.util.Map;
+
 public class TrainSystemTest {
 
 	TrainController controller;
@@ -77,9 +79,14 @@ public class TrainSystemTest {
 		controller.followSpeed();
 		user.overrideJoystickPosition(5);
 		sensor.takeTachografSnapshot();
+		Assert.assertEquals(20, controller.getReferenceSpeed());
 
-		Assert.assertTrue(sensor.getTachograftSnapshots().contains(10, 10));
-		Assert.assertTrue(sensor.getTachograftSnapshots().contains(20, 5));
+		Assert.assertEquals(sensor.getTachograftSnapshots().size(), 2);
+		Map<Integer,Map<Long,Integer>> columnMap = sensor.getTachograftSnapshots().columnMap();
+		Assert.assertTrue(columnMap.containsKey(10));
+		Assert.assertTrue(columnMap.containsKey(5));
+		Assert.assertTrue(columnMap.get(10).containsValue(10));
+		Assert.assertTrue(columnMap.get(5).containsValue(20));
 	}
 	
 }
