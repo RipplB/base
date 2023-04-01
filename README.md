@@ -1,3 +1,11 @@
+# EPIC EDIT
+inserting some epic text
+i can do bullet list too:
+- first item
+- second item
+	- indent yeah
+Some **bold text** to make it 3. (heading was already 1, right? :))
+*italic too*
 # Train Speed Controller
 
 This is a sample application for the verification laboratory.
