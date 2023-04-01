@@ -69,5 +69,17 @@ public class TrainSystemTest {
 		Assert.assertEquals(50, controller.getReferenceSpeed());
 	}
 
+	@Test
+	public void Tachograf_TakesSnapshots() {
+		user.overrideJoystickPosition(10);
+		controller.followSpeed();
+		sensor.takeTachografSnapshot();
+		controller.followSpeed();
+		user.overrideJoystickPosition(5);
+		sensor.takeTachografSnapshot();
+
+		Assert.assertTrue(sensor.getTachograftSnapshots().contains(10, 10));
+		Assert.assertTrue(sensor.getTachograftSnapshots().contains(20, 5));
+	}
 	
 }
