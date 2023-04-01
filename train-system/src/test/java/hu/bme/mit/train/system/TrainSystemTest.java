@@ -14,6 +14,8 @@ public class TrainSystemTest {
 	TrainController controller;
 	TrainSensor sensor;
 	TrainUser user;
+
+	static final int SPEED_LIMIT = 50;
 	
 	@Before
 	public void before() {
@@ -22,13 +24,11 @@ public class TrainSystemTest {
 		sensor = system.getSensor();
 		user = system.getUser();
 
-		sensor.overrideSpeedLimit(50);
+		sensor.overrideSpeedLimit(SPEED_LIMIT);
 	}
 	
 	@Test
 	public void OverridingJoystickPosition_IncreasesReferenceSpeed() {
-		sensor.overrideSpeedLimit(10);
-
 		Assert.assertEquals(0, controller.getReferenceSpeed());
 		
 		user.overrideJoystickPosition(5);
@@ -38,7 +38,7 @@ public class TrainSystemTest {
 		controller.followSpeed();
 		Assert.assertEquals(10, controller.getReferenceSpeed());
 		controller.followSpeed();
-		Assert.assertEquals(10, controller.getReferenceSpeed());
+		Assert.assertEquals(15, controller.getReferenceSpeed());
 	}
 
 	@Test
@@ -48,6 +48,15 @@ public class TrainSystemTest {
 		user.overrideJoystickPosition(-5);
 		controller.followSpeed();
 		Assert.assertEquals(0, controller.getReferenceSpeed());
+	}
+
+	@Test
+	public void OverridingJoystickPositionToPositiveAtSpeedLimit_ReferenceSpeedStaysSpeedLimit() {
+		user.overrideJoystickPosition(10);
+		for (int i = 0; i < 6; i++) {
+			controller.followSpeed();
+		}
+		Assert.assertEquals(50, controller.getReferenceSpeed());
 	}
 
 	
