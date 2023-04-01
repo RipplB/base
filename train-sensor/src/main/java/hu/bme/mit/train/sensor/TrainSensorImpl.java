@@ -4,7 +4,8 @@ import hu.bme.mit.train.interfaces.TrainController;
 import hu.bme.mit.train.interfaces.TrainSensor;
 import hu.bme.mit.train.interfaces.TrainUser;
 
-import com.google.guava.Table;
+import com.google.common.collect.Table;
+import com.google.common.collect.HashBasedTable;
 
 public class TrainSensorImpl implements TrainSensor {
 
@@ -31,12 +32,12 @@ public class TrainSensorImpl implements TrainSensor {
 	}
 
 	@Override
-	void takeTachografSnapshot() {
+	public void takeTachografSnapshot() {
 		tachograf.put(System.currentTimeMillis(), user.getJoystickPosition(), controller.getReferenceSpeed());
 	}
 
 	@Override
-	Table getTachograftSnapshots() {
+	public Table getTachograftSnapshots() {
 		return tachograf;
 	}
 

@@ -1,6 +1,6 @@
 package hu.bme.mit.train.interfaces;
 
-import com.google.guava.Table;
+import com.google.common.collect.Table;
 
 public interface TrainSensor {
 
