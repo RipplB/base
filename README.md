@@ -4,7 +4,7 @@ i can do bullet list too:
 - first item
 - second item
 	- indent yeah
-Some **bold text** to make it 3. (heading was already 1, right? :))
+Some **bold text** conflict test to make it 3. (heading was already 1, right? :))
 *italic too*
 # Train Speed Controller
 
