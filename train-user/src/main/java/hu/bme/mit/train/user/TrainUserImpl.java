@@ -11,13 +11,15 @@ public class TrainUserImpl implements TrainUser {
 
 	private TrainController controller;
 	private int joystickPosition;
+	static final int ticktime = 300;
+	static final int initdelay = 0;
 
 	public TrainUserImpl(TrainController controller) {
 		this.controller = controller;
 		ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
 		executorService.scheduleAtFixedRate(() -> {
 			controller.setJoystickPosition(joystickPosition);
-		}, 0, 300, TimeUnit.MILLISECONDS);	
+		}, initdelay, ticktime, TimeUnit.MILLISECONDS);	
 	}
 
 	@Override
