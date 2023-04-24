@@ -5,7 +5,7 @@ import hu.bme.mit.train.interfaces.TrainUser;
 
 public class TrainUserImpl implements TrainUser {
 
-	private static final long POLLING_INTERVAL = 200;
+	private static final long POLLING_INTERVAL = 300;
 
 	private TrainController controller;
 	private int joystickPosition;
