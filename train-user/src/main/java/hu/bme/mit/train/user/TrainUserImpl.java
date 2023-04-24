@@ -14,12 +14,14 @@ public class TrainUserImpl implements TrainUser {
 		this.controller = controller;
 		new Thread() {
 			public void run() {
-				controller.setJoystickPosition(joystickPosition);
-				try {
-					Thread.sleep(POLLING_INTERVAL);
-				} catch (Exception e) {
-					System.out.println("Error in TrainUser joystick polling");
-					e.printStackTrace();
+				while (true) {
+					controller.setJoystickPosition(joystickPosition);
+					try {
+						Thread.sleep(POLLING_INTERVAL);
+					} catch (Exception e) {
+						System.out.println("Error in TrainUser joystick polling");
+						e.printStackTrace();
+					}
 				}
 			}
 		}.start();
