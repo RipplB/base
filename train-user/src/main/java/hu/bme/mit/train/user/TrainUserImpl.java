@@ -11,6 +11,7 @@ public class TrainUserImpl implements TrainUser {
 
 	private TrainController controller;
 	private int joystickPosition;
+	private boolean alarmState;
 	static final int ticktime = 300;
 	static final int initdelay = 0;
 
@@ -36,6 +37,16 @@ public class TrainUserImpl implements TrainUser {
 	public void overrideJoystickPosition(int joystickPosition) {
 		this.joystickPosition = joystickPosition;
 		controller.setJoystickPosition(joystickPosition);
+	}
+
+	@Override
+	public void setAlarmState(boolean alarmState) {
+		this.alarmState = alarmState;
+	}
+
+	@Override
+	public boolean getAlarmState() {
+		return alarmState;
 	}
 
 }
