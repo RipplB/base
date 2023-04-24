@@ -5,11 +5,24 @@ import hu.bme.mit.train.interfaces.TrainUser;
 
 public class TrainUserImpl implements TrainUser {
 
+	private static final long POLLING_INTERVAL = 200;
+
 	private TrainController controller;
 	private int joystickPosition;
 
 	public TrainUserImpl(TrainController controller) {
 		this.controller = controller;
+		new Thread() {
+			public void run() {
+				controller.setJoystickPosition(joystickPosition);
+				try {
+					Thread.sleep(POLLING_INTERVAL);
+				} catch (Exception e) {
+					System.out.println("Error in TrainUser joystick polling");
+					e.printStackTrace();
+				}
+			}
+		}.start();
 	}
 
 	@Override
